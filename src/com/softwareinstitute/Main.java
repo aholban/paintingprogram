@@ -8,12 +8,25 @@ public class Main {
 
         Scanner input = new Scanner(System.in);
         System.out.println("What is the height of the wall in metres?");
-        int height = Integer.parseInt(input.nextLine());
+        float height = Float.parseFloat(input.nextLine());
         System.out.println("What is the width of the wall in metres?");
-        int width = Integer.parseInt(input.nextLine());
+        float width = Float.parseFloat(input.nextLine());
+        System.out.println("Are there any windows? (yes/no)");
+        String windows = input.nextLine();
+        float areaToPaint = height*width;
+        while(windows.equals("yes")){
+            System.out.println("What is the height of the window?");
+            float windowheight = Float.parseFloat(input.nextLine());
+            System.out.println("What is the width of the window?");
+            float windowwidth = Float.parseFloat(input.nextLine());
+            areaToPaint = areaToPaint - (windowwidth * windowheight);
+
+            System.out.println("Are there any other windows? (yes/no)");
+            windows = input.nextLine();
+        }
+
         System.out.println("How much does a litre of paint cost in pounds?");
         float price = Float.parseFloat(input.nextLine());
-        float areaToPaint = height*width;
         float paintNeeded = areaToPaint/6.0f;
         float cost = paintNeeded*price;
         System.out.println("Paint needed (in litres): " + paintNeeded);
