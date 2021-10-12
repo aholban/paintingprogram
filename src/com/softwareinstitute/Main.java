@@ -67,7 +67,7 @@ public class Main {
             costOfWorkers += rate*timeNeeded/60;
         }
         float totalCost = totalCostPaint + costOfWorkers;
-        System.out.println("Cost of workers(in pounds: " +costOfWorkers);
+        System.out.println("Cost of workers(in pounds): " +costOfWorkers);
         System.out.println("Paint needed (in litres): " + totalPaintNeeded);
         System.out.println("Cost of paint (in pounds): " + totalCostPaint);
         System.out.println("Total cost (in pounds): " + totalCost);
