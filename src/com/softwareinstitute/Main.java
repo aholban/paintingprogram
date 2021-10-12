@@ -1,4 +1,6 @@
 package com.softwareinstitute;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 
@@ -13,7 +15,7 @@ public class Main {
         System.out.println("How much does a litre of paint cost in pounds?");
         float price = Float.parseFloat(input.nextLine());
         float totalPaintNeeded = 0;
-        float totalCost = 0;
+        float totalCostPaint = 0;
         for(int i=1; i<=nwalls; i++) {
 
             System.out.println("What is the height of the wall " + i + " in metres?");
@@ -45,9 +47,29 @@ public class Main {
             float cost = paintNeeded * price;
 
             totalPaintNeeded = totalPaintNeeded + paintNeeded;
-            totalCost = totalCost + cost;
+            totalCostPaint = totalCostPaint + cost;
         }
+        String workers = "no";
+        float totalArea = totalPaintNeeded * 6.0f;
+        float timeNeeded = totalArea * 10;
+        float costOfWorkers = 0;
+        List<Float> rates = new ArrayList<Float>();
+        do{
+            System.out.println("What is the worker's hourly rate?");
+            rates.add(Float.parseFloat(input.nextLine()));
+
+            System.out.println("Do you require another worker?");
+            workers = input.nextLine();
+        }while(workers.equals("yes"));
+
+        timeNeeded = timeNeeded/rates.size();
+        for(float rate:rates){
+            costOfWorkers += rate*timeNeeded/60;
+        }
+        float totalCost = totalCostPaint + costOfWorkers;
+        System.out.println("Cost of workers(in pounds: " +costOfWorkers);
         System.out.println("Paint needed (in litres): " + totalPaintNeeded);
+        System.out.println("Cost of paint (in pounds): " + totalCostPaint);
         System.out.println("Total cost (in pounds): " + totalCost);
     }
 
