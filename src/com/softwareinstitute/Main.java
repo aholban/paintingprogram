@@ -28,6 +28,13 @@ public class Main {
         System.out.println("How much does a litre of paint cost in pounds?");
         float price = Float.parseFloat(input.nextLine());
         float paintNeeded = areaToPaint/6.0f;
+
+        System.out.println("Do you want a second layer of paint? (yes/no)");
+        String layers = input.nextLine();
+        if(layers.equals("yes")){
+            paintNeeded = paintNeeded*2;
+        }
+
         float cost = paintNeeded*price;
         System.out.println("Paint needed (in litres): " + paintNeeded);
         System.out.println("Total cost (in pounds): " + cost);
