@@ -24,6 +24,7 @@ public class Main {
         float price = Float.parseFloat(input.nextLine());
         float totalPaintNeeded = 0;
         float totalCostPaint = 0;
+        float totalArea = 0;
         for(int i=1; i<=nwalls; i++) {
 
             System.out.println("What is the height of the wall " + i + " in metres?");
@@ -44,32 +45,7 @@ public class Main {
                     }
                 }
 
-                for( int j=0; j<heightMosaic; j++){
-                    for(int k=0; k<widthMosaic; k++){
-                        switch (mosaic[k][j]){
-                            case "blue":
-                                System.out.print(ANSI_BLUE + " tile " + ANSI_RESET);
-                                break;
-                            case "red":
-                                System.out.print(ANSI_RED+ " tile " + ANSI_RESET);
-                                break;
-                            case "green":
-                                System.out.print(ANSI_GREEN+ " tile " +ANSI_RESET);
-                                break;
-                            case "yellow":
-                                System.out.print(ANSI_YELLOW + " tile " + ANSI_RESET);
-                                break;
-                            case "purple":
-                                System.out.print(ANSI_PURPLE + " tile " + ANSI_RESET);
-                                break;
-                            default:
-                                System.out.print(" tile ");
-                                break;
-                        }
-
-                    }
-                    System.out.println();
-                }
+                printMosaic(heightMosaic, widthMosaic, mosaic);
             }
             System.out.println("Are there any windows? (yes/no)");
             String windows = input.nextLine();
@@ -85,21 +61,19 @@ public class Main {
                 windows = input.nextLine();
             }
 
-            float paintNeeded = areaToPaint / 6.0f;
-
-            System.out.println("Do you want a second layer of paint? (yes/no)");
-            String layers = input.nextLine();
-            if (layers.equals("yes")) {
-                paintNeeded = paintNeeded * 2;
-            }
-
-            float cost = paintNeeded * price;
-
-            totalPaintNeeded = totalPaintNeeded + paintNeeded;
-            totalCostPaint = totalCostPaint + cost;
+            totalArea = totalArea + areaToPaint;
         }
+
+        System.out.println("Do you want a second layer of paint? (yes/no)");
+        String layers = input.nextLine();
+        if(layers.equals("yes")){
+            totalArea = totalArea *2;
+        }
+        float[] answer = paintCalculator(totalArea, price);
+        totalPaintNeeded = answer[0];
+        totalCostPaint = answer[1];
+
         String workers = "no";
-        float totalArea = totalPaintNeeded * 6.0f;
         float timeNeeded = totalArea * 10;
         float costOfWorkers = 0;
         List<Float> rates = new ArrayList<Float>();
@@ -120,6 +94,43 @@ public class Main {
         System.out.println("Paint needed (in litres): " + totalPaintNeeded);
         System.out.println("Cost of paint (in pounds): " + totalCostPaint);
         System.out.println("Total cost (in pounds): " + totalCost);
+    }
+
+    public static float[] paintCalculator(float totalArea, float paintPrice){
+        float paintNeeded = totalArea/6.0f;
+        float cost = paintNeeded*paintPrice;
+        float answer[] = {paintNeeded, cost};
+        return answer;
+
+    }
+
+    public static void printMosaic(int heightMosaic, int widthMosaic, String[][] mosaic){
+        for( int j=0; j<heightMosaic; j++){
+            for(int k=0; k<widthMosaic; k++){
+                switch (mosaic[k][j]){
+                    case "blue":
+                        System.out.print(ANSI_BLUE + " tile " + ANSI_RESET);
+                        break;
+                    case "red":
+                        System.out.print(ANSI_RED+ " tile " + ANSI_RESET);
+                        break;
+                    case "green":
+                        System.out.print(ANSI_GREEN+ " tile " +ANSI_RESET);
+                        break;
+                    case "yellow":
+                        System.out.print(ANSI_YELLOW + " tile " + ANSI_RESET);
+                        break;
+                    case "purple":
+                        System.out.print(ANSI_PURPLE + " tile " + ANSI_RESET);
+                        break;
+                    default:
+                        System.out.print(" tile ");
+                        break;
+                }
+
+            }
+            System.out.println();
+        }
     }
 
 }
