@@ -6,6 +6,14 @@ import java.util.Scanner;
 
 public class Main {
 
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_RED = "\u001B[31m";
+    public static final String ANSI_GREEN = "\u001B[32m";
+    public static final String ANSI_YELLOW = "\u001B[33m";
+    public static final String ANSI_BLUE = "\u001B[34m";
+    public static final String ANSI_PURPLE = "\u001B[35m";
+    public static final String ANSI_CYAN = "\u001B[36m";
+
     public static void main(String[] args) {
 
         Scanner input = new Scanner(System.in);
@@ -28,12 +36,40 @@ public class Main {
                 int heightMosaic = Math.round(height);
                 int widthMosaic = Math.round(width);
                 String mosaic[][] = new String[widthMosaic][heightMosaic];
-                for(int k=0; k<widthMosaic; k++)
-                    for(int j=0; j<heightMosaic; j++){
-                        System.out.println("What color do you want tile " +k +" metres across and " + j +" metres down to be?");
+                for(int k=0; k<widthMosaic; k++) {
+                    for (int j = 0; j < heightMosaic; j++) {
+                        System.out.println("What color do you want tile " + k + " metres across and " + j + " metres down to be?");
                         mosaic[k][j] = input.nextLine();
-                        System.out.println("Tile " + k + " " +j +" is " +mosaic[k][j]);
+                        //System.out.println("Tile " + k + " " + j + " is " + mosaic[k][j]);
                     }
+                }
+
+                for( int j=0; j<heightMosaic; j++){
+                    for(int k=0; k<widthMosaic; k++){
+                        switch (mosaic[k][j]){
+                            case "blue":
+                                System.out.print(ANSI_BLUE + " tile " + ANSI_RESET);
+                                break;
+                            case "red":
+                                System.out.print(ANSI_RED+ " tile " + ANSI_RESET);
+                                break;
+                            case "green":
+                                System.out.print(ANSI_GREEN+ " tile " +ANSI_RESET);
+                                break;
+                            case "yellow":
+                                System.out.print(ANSI_YELLOW + " tile " + ANSI_RESET);
+                                break;
+                            case "purple":
+                                System.out.print(ANSI_PURPLE + " tile " + ANSI_RESET);
+                                break;
+                            default:
+                                System.out.print(" tile ");
+                                break;
+                        }
+
+                    }
+                    System.out.println();
+                }
             }
             System.out.println("Are there any windows? (yes/no)");
             String windows = input.nextLine();
