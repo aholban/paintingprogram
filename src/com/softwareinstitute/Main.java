@@ -22,6 +22,19 @@ public class Main {
             float height = Float.parseFloat(input.nextLine());
             System.out.println("What is the width of the wall " + i + " in metres?");
             float width = Float.parseFloat(input.nextLine());
+            System.out.println("Do you want this wall to be a mosaic? (yes/no)");
+            String isMosaic = input.nextLine();
+            if(isMosaic.equals("yes")){
+                int heightMosaic = Math.round(height);
+                int widthMosaic = Math.round(width);
+                String mosaic[][] = new String[widthMosaic][heightMosaic];
+                for(int k=0; k<widthMosaic; k++)
+                    for(int j=0; j<heightMosaic; j++){
+                        System.out.println("What color do you want tile " +k +" metres across and " + j +" metres down to be?");
+                        mosaic[k][j] = input.nextLine();
+                        System.out.println("Tile " + k + " " +j +" is " +mosaic[k][j]);
+                    }
+            }
             System.out.println("Are there any windows? (yes/no)");
             String windows = input.nextLine();
             float areaToPaint = height * width;
